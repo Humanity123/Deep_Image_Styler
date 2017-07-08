@@ -1,12 +1,36 @@
+from   scipy.misc import imread
+from   PIL import Image
+import os
 import tensorflow as tf
 import numpy as np
-import scipy.misc
 import VGG19 
 
 class Image:
-	def __init__(self, image_matrix=None):
-		''' basic constructor of image class based on the pixel values of the image '''
+	def __init__(self, image_matrix=None, image_path=None):
+		''' basic constructor of image class'''
+		if image_path is not None:
+
+		if image_path is None and image_matrix is not None
 		self.image_matrix = image_matrix
+
+	def save_image(self, image_path=None):
+		if image_path is None:
+			image_path = os.path.join(os.getcwd(), "/saved_image.jpg")
+		clipped_image_matrix = np.clip(self.image_matrix, 0, 255).astype(np.uint8)
+    	Image.fromarray(clipped_image_matrix).save(path, quality=95)
+
+	def read_image_from_path(image_path):
+		image_matrix = imread(image_path).astype(np.float)
+
+		#Method For GrayScale Images
+		if len(image.shape) == 2:
+			image_matrix = np.dstack(image_matrix, image_matrix, image_matrix)
+
+		#method for PNG images with 4  channels:
+		if image.shape[2] == 4:
+			image_matrix = image_matrix[:, :, :3]
+
+		return image_matrix
 
 	def get_image_content(self, model, model_type, content_layers):
 		''' uses VGG19 model to get the features representing content of an image 
@@ -108,3 +132,11 @@ class Image:
 
 def apply_style():
 	''' it applies the style of one image to the other'''
+
+def main():
+	return 0
+
+
+
+if __name__ == "__main__":
+	return main()
