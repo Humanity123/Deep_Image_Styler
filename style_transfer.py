@@ -152,7 +152,7 @@ class Image:
 
 				return image_with_minimum_total_loss.reshape(content_image.image_matrix.shape) + image_mean_value
 
-def apply_style(model, model_type, content_image_path, style_image_path, starting_image_path = None):
+def apply_style(model, model_type, content_image_path, style_image_path, starting_image_path = None, content_weight = 1, style_weight = 1, iters = 1000):
 	''' it applies the style of one image to the other'''
 	content_layers = ['relu1_1']
 	style_layers = ['relu1_1','relu2_1','relu3_1','relu4_1','relu5_1']
@@ -160,8 +160,8 @@ def apply_style(model, model_type, content_image_path, style_image_path, startin
 	style_image   = Image(image_path = style_image_path)
 	if starting_image_path is not None:
 		starting_image = Image(image_path = starting_image_path)
-	#return (content_image.get_image_content(model, model_type, content_layers), style_image.get_image_style(model, model_type, style_layers))
-	generated_image = Image(content_image.generate_image(model, 'matconvnet', content_image,content_layers, style_image,style_layers,25e0, 5e2, 1000, 1, starting_image))
+	
+	generated_image = Image(content_image.generate_image(model, 'matconvnet', content_image,content_layers, style_image,style_layers,content_weight, style_weight, iters, 1, starting_image))
 	generated_image.save_image(image_name='final')
 
 
@@ -171,7 +171,10 @@ def main():
 	style_image_path = ''
 	starting_image_path  = ''
 	model = ''
-	apply_style(model, 'matconvnet', content_image_path, style_image_path, starting_image_path)
+	content_weight = 1
+	style_weight = 1
+	iters = 1000
+	apply_style(model, 'matconvnet', content_image_path, style_image_path, starting_image_path, content_weight, style_weight, iters)
 
 
 if __name__ == "__main__":
