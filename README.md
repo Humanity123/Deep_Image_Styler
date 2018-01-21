@@ -14,6 +14,9 @@ style_weight | weight/importance given to learning style
 iters | number of iterations
 
 ## Results
+<p align="center"> 
+<img src="/result_images/trans_vid.gif" width="307" height="461">
+</p>
 
 ### Original Images
 Content Image | Style Image
