@@ -14,6 +14,7 @@ style_weight | weight/importance given to learning style
 iters | number of iterations
 
 ## Results
+### GIF of the transition 
 <p align="center"> 
 <img src="/result_images/trans_vid.gif" width="307" height="461">
 </p>
